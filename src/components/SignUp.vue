@@ -16,12 +16,18 @@ export default {
         let displayName = ref("");
         let email = ref("");
         let password = ref("");
+        let error = ref(null);
         let signUp = async()=> {
             try {
                 let res = await auth.createUserWithEmailAndPassword(email.value,password.value);
-                console.log(res);
+                if(!res) {
+                    throw new Error('Could not create new user')
+                }
+                res.user.updateProfile({displayName:displayName.value})
+                console.log(res.user);
             } catch (error) {
-               console.log(error.message); 
+                error.value = error.message;
+                console.log(error.value); 
             }
         }
         return {displayName,email,password,signUp}
