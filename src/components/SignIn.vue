@@ -13,14 +13,14 @@ import {ref} from 'vue'
 import useLogin from "../composables/useLogin";
 
 export default {
-    setup() {
+    setup(props,context) {
         let email = ref("");
         let password = ref("");
         let {error,login} = useLogin();
         let signIn = async()=> {
            let res = await login(email.value,password.value);
            if(res) {
-                console.log(res.user);
+                context.emit("enterChatroom")
            }
         }
         return {email,password,signIn,error}
