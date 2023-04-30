@@ -1,6 +1,7 @@
-import firebase from "firebase/app"
-import "firebase/firestore"
-import "firebase/auth"
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
+
 const firebaseConfig = {
     apiKey: "AIzaSyBr3vEHPOoNCk6bsVjtcWVDHPEMWvppwWQ",
     authDomain: "live-chart-bd665.firebaseapp.com",
@@ -12,9 +13,8 @@ const firebaseConfig = {
   };
 
   firebase.initializeApp(firebaseConfig);
+  let db=firebase.firestore();
+  let auth=firebase.auth();
+  let timestamp=firebase.firestore.FieldValue.serverTimestamp;
 
-  let db = firebase.firestore();
-  let auth = firebase.auth();
-  let timestamp = firebase.firestore.FieldValue.serverTimeStamp;
-
-  export {db,timestamp,auth}
+  export {db,timestamp,auth};
