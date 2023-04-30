@@ -10,25 +10,16 @@
 
 <script>
 import {ref} from 'vue'
-import { auth } from '../firebase/config';
+import useSignUp from "../composables/useSignUp"
 export default {
     setup() {
         let displayName = ref("");
         let email = ref("");
         let password = ref("");
-        let error = ref(null);
+        let {error,createAccount}=useSignUp();
         let signUp = async()=> {
-            try {
-                let res = await auth.createUserWithEmailAndPassword(email.value,password.value);
-                if(!res) {
-                    throw new Error('Could not create new user')
-                }
-                res.user.updateProfile({displayName:displayName.value})
-                console.log(res.user);
-            } catch (error) {
-                error.value = error.message;
-                console.log(error.value); 
-            }
+            let res = await createAccount(email.value,password.value,displayName.value);
+            console.log(res.user);
         }
         return {displayName,email,password,signUp}
     }
