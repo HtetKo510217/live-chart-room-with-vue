@@ -1,10 +1,12 @@
 <template>
     <div class="container">
-        chart room
+        <Navbar />
     </div>
 </template>
 <script>
+import Navbar from '../components/Navbar.vue'
 export default {
+  components: { Navbar },
     
 }
 </script>
