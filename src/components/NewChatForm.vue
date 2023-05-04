@@ -7,17 +7,19 @@
 import { ref } from 'vue';
 import getUser from '../composables/getUser';
 import { timestamp } from '../firebase/config';
+import useCollection from '../composables/useCollection';
 export default {
     setup() {
         let message = ref('');
         let {user} = getUser();
-        let handleSubmit = () => {
+        let {error,addDoc} = useCollection('messages');
+        let handleSubmit = async () => {
             let chart = {
                 message : message.value,
                 name : user.value.displayName,
                 created_at : timestamp()
             }
-            console.log(chart);
+            await addDoc(chart)
             message.value = "";
         }
 
