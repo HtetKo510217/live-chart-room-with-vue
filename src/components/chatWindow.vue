@@ -1,17 +1,32 @@
 <template>
     <div class="chat-window">
-        <div class="messages">
+        <div class="messages" v-for="chartData in messages" :key="chartData.id">
             <div class="single">
                 <span class="created-at">3mins ago</span>
-                <span class="name">hmt</span>
-                <span class="message">hi there man</span>
+                <span class="name">{{chartData.name}}</span>
+                <span class="message">{{ chartData.message }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import {ref} from "vue"
+import { db } from '../firebase/config';
 export default {
+    setup() {
+        let messages = ref([]);
+        db.collection('messages').orderBy('created_at').onSnapshot((snap)=>{
+            let results = [];
+            snap.docs.forEach((doc)=> {
+                let document = {...doc.data(),id:doc.id}
+                results.push(document)
+            })
+            messages.value = results
+            console.log(messages.value);
+        })
+        return {messages}
+    }
 }
 </script>
 
