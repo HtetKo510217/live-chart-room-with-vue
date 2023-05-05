@@ -68,7 +68,7 @@ export default {
         color: gray;
       }
       .messages {
-        max-height: 400px;
+        max-height: 300px;
         overflow: auto;
       }
 </style>

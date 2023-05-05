@@ -5,7 +5,6 @@ body {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   font-weight: normal;
 }
 
@@ -13,7 +12,7 @@ body {
   display: block;
   width: 90%;
   max-width: 960px;
-  margin: 80px auto;
+  margin:30px auto;
   border-radius: 20px;
   box-shadow: 2px 4px 6px rgba(28,6,49,0.1);
   background: #fff;
